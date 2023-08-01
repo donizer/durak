@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./index.css";
-import { Card, Deck, DurakGame, Player } from "./game/durak";
+import { DurakGame } from "./game/durak";
 import CardVisual from "./components/CardVisual";
 
 const game = new DurakGame();
@@ -11,8 +11,8 @@ function App() {
     enum names {
       "donizer",
       "snap",
-      "Armenin",
-      "Pussy Destroyer",
+      "mugnum dong",
+      "Kitty Destroyer",
     }
     const playersNum = game.getPlayers().length;
     switch (true) {

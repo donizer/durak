@@ -136,7 +136,6 @@ export class Player {
   private hand: Deck;
   private id: number;
   private game: DurakGame;
-  private round: DurakRound | null;
   private isPass: boolean;
 
   constructor(game: DurakGame, name: string, id: number) {
@@ -144,7 +143,6 @@ export class Player {
     this.hand = new Deck();
     this.id = id;
     this.game = game;
-    this.round = this.game.getCurRound();
     this.isPass = false;
   }
 
@@ -193,14 +191,15 @@ export class Player {
 
 export class DurakRound {
   private game: DurakGame;
-  private trumpSign: defaultSignType;
+  // private trumpSign: defaultSignType; //todo trump
   private attackCards: Card[];
   private defenseCards: Card[];
   private roundValues: number[];
 
-  constructor(game: DurakGame, sign: defaultSignType) {
+  constructor(game: DurakGame) {
+    //,sign: defaultSignType
     this.game = game;
-    this.trumpSign = sign;
+    // this.trumpSign = sign;
     this.attackCards = [];
     this.defenseCards = [];
     this.roundValues = [];
@@ -233,6 +232,7 @@ export class DurakRound {
     return false;
   }
 
+  //todo possible need rewrite
   checkDefenceCard(card: Card) {
     if (this.defenseCards.length === 0) return false;
 
@@ -430,7 +430,7 @@ export class DurakGame {
 
   startRound() {
     if (this.trumpSign == null) throw new Error("Fill deck first");
-    this.curRound = new DurakRound(this, this.trumpSign);
+    this.curRound = new DurakRound(this); // ,this.trumpSign //todo
   }
 
   getTrumpSign(): defaultSignType | null {
